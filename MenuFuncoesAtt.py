@@ -2,9 +2,9 @@ import time
 
 def voltar(delay):
 
-        print("\Voltando...\n")
+        print("\nVoltando...\n")
         time.sleep(delay)
-        return
+        
 
 def lerOpcao(minimo, maximo, menu):
     while True:
@@ -57,6 +57,7 @@ def lanchonete():
             
         if opcao == 0:
             voltar(2)
+            return
 
         elif opcao == 1:              
             print("\nHamburguer adicionado\n")
@@ -114,7 +115,8 @@ Escolha a operação que será realizada entre os números {nmr1} e {nmr2}
         opcaoOperacao = lerOpcao(0, 4, menu)
 
         if opcaoOperacao == 0: 
-            voltar(2)                                       
+            voltar(2) 
+            return                                      
     
         elif opcaoOperacao == 1:
             print(f"\n{nmr1} + {nmr2} = {nmr1+nmr2}\n")
@@ -129,8 +131,10 @@ Escolha a operação que será realizada entre os números {nmr1} e {nmr2}
             time.sleep(2)
 
         elif opcaoOperacao == 4:
-            print(f"\n{nmr1} / {nmr2} = {nmr1/nmr2:.2f}\n")
-            time.sleep(2)
+            if nmr2 == 0:
+                print("Não é possível dividir por zero")
+            else:
+                print(f"\n{nmr1} / {nmr2} = {nmr1/nmr2:.2f}\n")
 
             
 #----------------------------------CALCULADORA-IDADE----------------------------------------
@@ -147,6 +151,7 @@ def calculadoraIdade():
 
         if opcao == 2:
             voltar(2)
+            return
 
         elif opcao == 1:
             
@@ -155,25 +160,25 @@ def calculadoraIdade():
                 anoAtual = lerInt("Digite o ano atual:")
             
 
-        menu = """
+                menu = """
         Fez aniversário esse ano?
 
 1 - Sim
 2 - Não"""
             
-        fezAniversario = lerOpcao(1, 2, menu)
+                fezAniversario = lerOpcao(1, 2, menu)
 
         
 
-        if fezAniversario == 1:
-            print(f"\nVocê tem {anoAtual-anoNascimento} anos.")
-            time.sleep(2)
-            break
+                if fezAniversario == 1:
+                    print(f"\nVocê tem {anoAtual-anoNascimento} anos.")
+                    time.sleep(2)
+                    break
             
-        elif fezAniversario == 2:
-            print(f"\nVocê tem {(anoAtual-anoNascimento)-1} anos.")
-            time.sleep(2)
-            break
+                elif fezAniversario == 2:
+                    print(f"\nVocê tem {(anoAtual-anoNascimento)-1} anos.")
+                    time.sleep(2)
+                    break
 
 #----------------------------------CONVERSOR-TEMPERATURA----------------------------------------
 
@@ -188,11 +193,12 @@ def conversorTemperatura():
 
         if opcao == 2:
             voltar(2)
+            return
 
         elif opcao == 1:
 
             menu = """
-            Selecione a unidade que deseja converter:
+Selecione a unidade que deseja converter:
             
 1 - Celsius
 2 - Fahrenheit
@@ -222,7 +228,7 @@ Para qual temperatura deseja converter?
 
                 valorTemperatura = lerInt("Digite o valor da temperatura:")
                 menu = """
-print("Para qual temperatura deseja converter?")
+Para qual temperatura deseja converter?
                 
 1 - Celsius
 2 - Kelvin"""
@@ -242,7 +248,7 @@ print("Para qual temperatura deseja converter?")
 
                     valorTemperatura = lerInt("Digite o valor da temperatura:")
                     menu = """
-print("Para qual temperatura deseja converter?")
+Para qual temperatura deseja converter?
                 
 1 - Celsius
 2 - Fahrenheit"""
@@ -274,3 +280,36 @@ def calculadoraDesconto():
 
     print(f"\nR${valorBruto:.2f} com {desconto}% de desconto fica R${valorDesconto:.2f}\n".replace('.', ','))
     voltar(2)
+    return
+
+#Início do código--------------------------------------------------------------------------
+
+while True:
+    print("Seja bem-vindo(a) ao menu de utilidades!")
+
+    menu = """\nSelecione uma função:
+
+1 - Sistema de Lanchonete
+2 - Calculadora Simples
+3 - Calculadora de Idade
+4 - Conversor de Temperatura
+5 - Calculadora de Desconto
+
+6 - Sair do programa"""
+
+    funcao = lerOpcao(1, 6, menu)
+
+    if funcao == 1:
+        lanchonete()
+    elif funcao == 2:
+        calculadora()
+    elif funcao == 3:
+        calculadoraIdade()
+    elif funcao == 4:
+        conversorTemperatura()
+    elif funcao == 5:
+        calculadoraDesconto()
+    elif funcao == 6:
+        print("\nSaindo do programa...\n")
+        time.sleep(2)
+        break
